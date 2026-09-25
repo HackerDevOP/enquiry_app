@@ -15,6 +15,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/enquiry/enquiry').then((m) => m.Enquiry),
   },
   {
+    path: 'new-enquiry',
+    loadComponent: () =>
+      import('./components/enquiry-form/enquiry-form').then((m) => m.EnquiryForm),
+  },
+  {
     path: 'enquiries',
     loadComponent: () =>
       import('./pages/admin/enquiry-crud/enquiry-crud').then((m) => m.EnquiryCrud),
@@ -26,8 +31,7 @@ export const routes: Routes = [
   },
   {
     path: 'status',
-    loadComponent: () =>
-      import('./pages/admin/status-crud/status-crud').then((m) => m.StatusCrud),
+    loadComponent: () => import('./pages/admin/status-crud/status-crud').then((m) => m.StatusCrud),
   },
   {
     path: 'track-application',

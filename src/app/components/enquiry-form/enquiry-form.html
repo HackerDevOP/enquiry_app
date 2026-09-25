@@ -1,0 +1,173 @@
+<div class="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 lg:p-8 font-sans selection:bg-indigo-500 selection:text-white">
+
+  <div class="max-w-4xl mx-auto space-y-8">
+
+    <!-- Top Header -->
+    <div class="pb-6 border-b border-slate-800/80">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide uppercase mb-2">
+        <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+        Admin Panel
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Enquiry Management Form</h1>
+    </div>
+
+    <!-- Standalone Form Container (No Table) -->
+    <div class="bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl p-6 sm:p-8">
+      <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-800">
+        <h2 class="text-lg font-bold text-white">
+          {{ enquiryModel().enquiryId > 0 ? 'Edit Enquiry' : 'Create Enquiry' }}
+        </h2>
+        <span class="text-xs font-mono font-bold text-indigo-400">
+          #ENQ-{{ enquiryModel().enquiryId || 'NEW' }}
+        </span>
+      </div>
+
+      <!-- Form Grid matching IEnquiry -->
+      <form (submit)="onUpsert($event)" novalidate class="space-y-5">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Customer Name</label>
+            <input
+              type="text"
+              [formField]="enquiryForm.customerName"
+              placeholder="John Doe"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Customer Email</label>
+            <input
+              type="email"
+              [formField]="enquiryForm.customerEmail"
+              placeholder="john@example.com"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Customer Phone</label>
+            <input
+              type="tel"
+              [formField]="enquiryForm.customerPhone"
+              placeholder="mobile number"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Enquiry Type</label>
+            <select
+              [formField]="enquiryForm.enquiryType"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            >
+              <option selected disabled value="">---select type---</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Desktop">Desktop</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Category ID</label>
+            <select
+              [formField]="enquiryForm.categoryId"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            >
+              <option selected disabled value="">---select category---</option>
+              @for (cat of category.loadCategory(); track cat.categoryId) {
+                <option [disabled]="!cat.isActive" [value]="cat.categoryId">
+                  {{ cat.categoryName }}
+                </option>
+              }
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Status ID</label>
+            <select
+              [formField]="enquiryForm.statusId"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            >
+              <option selected disabled value="">---select status---</option>
+              @for (status of status.loadStatus(); track status.statusId) {
+                <option [disabled]="!status.isActive" [value]="status.statusId">
+                  {{ status.statusName }}
+                </option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Enquiry Date</label>
+            <input
+              [formField]="enquiryForm.enquiryDate"
+              type="datetime-local"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Follow-up Date</label>
+            <input
+              [formField]="enquiryForm.followUpDate"
+              type="datetime-local"
+              class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Message</label>
+          <textarea
+            [formField]="enquiryForm.message"
+            rows="3"
+            placeholder="Enquiry details..."
+            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500 resize-none"
+          ></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Feedback</label>
+          <textarea
+            rows="2"
+            [formField]="enquiryForm.feedback"
+            placeholder="Internal notes / feedback..."
+            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-indigo-500 resize-none"
+          ></textarea>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <input
+            [formField]="enquiryForm.isConverted"
+            type="checkbox"
+            id="convertedCheck"
+            class="w-4 h-4 rounded bg-slate-950 border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+          />
+          <label for="convertedCheck" class="text-sm font-medium text-slate-300 cursor-pointer">Mark as Converted</label>
+        </div>
+
+        <!-- Form Actions Footer -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+          <button
+            type="button"
+            (click)="clearModel()"
+            class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/25 transition cursor-pointer"
+          >
+            {{ enquiryModel().enquiryId > 0 ? 'Update Enquiry' : 'Create Enquiry' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>

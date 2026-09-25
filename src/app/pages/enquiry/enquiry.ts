@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { BRAND } from '../../const/global-const';
 import { enquirySchema, InitialEnquiry } from '../../models/enquiry-model';
-import { form, FormField } from '@angular/forms/signals';
+import { form } from '@angular/forms/signals';
+import { EnquiryList } from '../../components/enquiry-list/enquiry-list';
 
 @Component({
-  imports: [FormField],
+  imports: [EnquiryList],
   selector: 'app-enquiry',
   styleUrl: './enquiry.css',
   templateUrl: './enquiry.html',
