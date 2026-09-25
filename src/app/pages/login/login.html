@@ -1,0 +1,68 @@
+<div
+  class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 selection:bg-indigo-500 selection:text-white"
+>
+  <div
+    class="w-full max-w-md bg-slate-900/70 border border-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-10"
+  >
+    <!-- Logo & Header -->
+    <div class="text-center mb-8">
+      <div
+        class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-linear-to-tr from-indigo-600 to-sky-500 text-white font-bold text-xl shadow-lg shadow-indigo-600/30 mb-4"
+      >
+        QP
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Welcome Back</h1>
+      <p class="text-xs sm:text-sm text-slate-400 mt-1">Sign in to access your QueryPulse portal</p>
+    </div>
+
+    <!-- Login Form -->
+    <form (submit)="onLogin($event)" novalidate class="space-y-5">
+      <!-- Email Field -->
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+          >Username</label
+        >
+        <input
+          type="text"
+          [formField]="loginForm.username"
+          placeholder="username"
+          class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+        />
+        <app-field-error [control]="loginForm.username()" />
+      </div>
+      <!-- Password Field -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400"
+            >Password</label
+          >
+        </div>
+        <input
+          type="password"
+          [formField]="loginForm.password"
+          placeholder="••••••••"
+          class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+        />
+        <app-field-error [control]="loginForm.password()" />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/25 transition transform active:scale-95 text-center cursor-pointer mt-2"
+      >
+        Sign In
+      </button>
+    </form>
+
+    <!-- Footer Help -->
+    <div class="mt-8 text-center text-xs text-slate-500 border-t border-slate-800/80 pt-6">
+      <p>
+        Need access?
+        <a routerLink="/enquiry" class="text-indigo-400 font-semibold hover:underline"
+          >Contact Support Team</a
+        >
+      </p>
+    </div>
+  </div>
+</div>

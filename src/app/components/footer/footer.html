@@ -1,0 +1,60 @@
+<footer class="bg-slate-950 border-t border-slate-900/80 pt-16 pb-12 text-slate-400">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+
+    <!-- Brand Info -->
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-linear-to-tr from-indigo-600 to-sky-500 flex items-center justify-center text-white font-bold text-sm shadow-md shadow-indigo-600/30">
+          <img src="/android-chrome-512x512.png" class="size-7" alt="">
+        </div>
+        <span class="text-base font-bold text-white tracking-tight">{{brand}}</span>
+      </div>
+      <p class="text-sm text-slate-400 max-w-sm leading-relaxed mb-6">
+        The modern support and enquiry portal designed to streamline communications, track progress in real-time, and resolve questions swiftly.
+      </p>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        All Systems Operational
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-xs font-semibold uppercase tracking-wider text-white mb-4">Navigation</h4>
+      <ul class="space-y-3 text-sm">
+        <li>
+          <a routerLink="/" class="hover:text-indigo-400 transition cursor-pointer">Home</a>
+        </li>
+        <li>
+          <a routerLink="/enquiry" class="hover:text-indigo-400 transition cursor-pointer">Submit Enquiry</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Support / Resources -->
+    <div>
+      <h4 class="text-xs font-semibold uppercase tracking-wider text-white mb-4">Support</h4>
+      <ul class="space-y-3 text-sm">
+        <li>
+          <a routerLink="/" class="hover:text-indigo-400 transition cursor-pointer">How It Works</a>
+        </li>
+        <li>
+          <a routerLink="/" class="hover:text-indigo-400 transition cursor-pointer">Help Center</a>
+        </li>
+        <li>
+          <a routerLink="/" class="hover:text-indigo-400 transition cursor-pointer">Privacy Policy</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="max-w-6xl mx-auto px-6 pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+    <p>&copy; 2026 {{brand}} Support Portal. All rights reserved.</p>
+    <div class="flex gap-6">
+      <a routerLink="/terms" class="hover:text-slate-400 transition cursor-pointer">Terms of Service</a>
+      <a routerLink="/security" class="hover:text-slate-400 transition cursor-pointer">Security</a>
+    </div>
+  </div>
+</footer>

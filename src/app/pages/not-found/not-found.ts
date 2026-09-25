@@ -1,19 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { BRAND } from '../../const/global-const';
 import { Title } from '@angular/platform-browser';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   imports: [RouterLink],
-  selector: 'app-home',
-  styleUrl: './home.css',
-  templateUrl: './home.html',
+  selector: 'app-not-found',
+  styleUrl: './not-found.css',
+  templateUrl: './not-found.html',
 })
-export class Home {
-  protected readonly brand = BRAND.Name;
+export class NotFound {
   private readonly title = inject(Title);
 
   ngOnInit() {
-    this.title.setTitle(this.brand);
+    this.title.setTitle('404 - Page Not Found');
   }
 }

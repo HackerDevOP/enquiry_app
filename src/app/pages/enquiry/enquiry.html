@@ -1,1 +1,138 @@
-<p>enquiry works!</p>
+<div
+  class="min-h-screen bg-slate-950 text-slate-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 selection:bg-indigo-500 selection:text-white"
+>
+  <div
+    class="w-full max-w-3xl bg-slate-900/70 border border-slate-800/80 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-10"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between pb-6 mb-8 border-b border-slate-800/80">
+      <div>
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold tracking-wide uppercase mb-2"
+        >
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+          {{ brand }}
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          Submit New Enquiry
+        </h1>
+      </div>
+      <div class="text-right hidden sm:block">
+        <span class="text-xs text-slate-500 block">Enquiry ID</span>
+        <span class="text-sm font-mono font-bold text-indigo-400">#ENQ-000</span>
+      </div>
+    </div>
+
+    <!-- Enquiry Form -->
+    <form (submit)="OnSubmit($event)" class="space-y-6">
+      <!-- Customer Info Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Customer Name -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+            >Name</label
+          >
+          <input
+            type="text"
+            [formField]="enquiryForm.customerName"
+            placeholder="e.g. John Doe"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+          />
+        </div>
+        <!-- Customer Email -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+            >Email</label
+          >
+          <input
+            type="email"
+            [formField]="enquiryForm.customerEmail"
+            placeholder="john@example.com"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+          />
+        </div>
+      </div>
+
+      <!-- Phone & Enquiry Type Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Customer Phone -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+            >Phone Number</label
+          >
+          <input
+            type="tel"
+            [formField]="enquiryForm.customerPhone"
+            placeholder="phone number"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+          />
+        </div>
+
+        <!-- Enquiry Type -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+            >Enquiry Type</label
+          >
+          <select
+            [formField]="enquiryForm.enquiryType"
+            class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+          >
+            <option class="bg-slate-900 text-slate-400" selected disabled value="">
+              --- Select Option ---
+            </option>
+            <option class="bg-slate-900 text-white" value="1">Option One</option>
+            <option class="bg-slate-900 text-white" value="2">Option Two</option>
+          </select>
+        </div>
+      </div>
+      <!-- Message -->
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+          >Message / Details</label
+        >
+        <textarea
+          [formField]="enquiryForm.message"
+          rows="4"
+          placeholder="Describe your enquiry or question in detail..."
+          class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"
+        ></textarea>
+      </div>
+
+      <!-- Feedback -->
+      <div>
+        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+          >Feedback Notes</label
+        >
+        <textarea
+          [formField]="enquiryForm.feedback"
+          rows="2"
+          placeholder="Internal notes or specialist feedback..."
+          class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-white placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition resize-none"
+        ></textarea>
+      </div>
+
+      <!-- Is Converted Toggle & Submit Actions -->
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800/80"
+      >
+        <!-- Converted Checkbox/Toggle -->
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input
+            [formField]="enquiryForm.isConverted"
+            type="checkbox"
+            class="w-5 h-5 rounded bg-slate-950 border-slate-700 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-slate-900 cursor-pointer"
+          />
+          <span class="text-sm font-medium text-slate-300">Mark as Converted</span>
+        </label>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/25 transition transform active:scale-95 text-center cursor-pointer"
+        >
+          Submit Enquiry
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
