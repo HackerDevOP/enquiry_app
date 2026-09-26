@@ -8,9 +8,10 @@ import { ToastrService } from '../../../services/toast/toast-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastMessages } from '../../../const/global-const';
 import { TableAction, TableColumn, TableUi } from '../../../components/table-ui/table-ui';
+import { FieldError } from '../../../components/field-error/field-error';
 
 @Component({
-  imports: [FormField, TableUi],
+  imports: [FormField, TableUi, FieldError],
   selector: 'app-status-crud',
   styleUrl: './status-crud.css',
   templateUrl: './status-crud.html',
