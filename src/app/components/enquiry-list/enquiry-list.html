@@ -26,13 +26,6 @@
           placeholder="search by customer name..."
           class="bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 w-full sm:w-64"
         />
-        <button
-          type="button"
-          (click)="toggleModel()"
-          class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/25 transition cursor-pointer whitespace-nowrap"
-        >
-          + Add Enquiry
-        </button>
       </div>
     </div>
 
@@ -47,31 +40,6 @@
         (rowAction)="handleTableAction($event)"
         (rowClick)="onEdit($event, $event.enquiryId)"
       />
-
-      <!-- Pagination Footer -->
-      <div
-        class="p-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400"
-      >
-        <span>Showing 2 of 24 entries</span>
-        <div class="flex items-center gap-2">
-          <button
-            class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer"
-          >
-            Previous
-          </button>
-          <button class="px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold">1</button>
-          <button
-            class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer"
-          >
-            2
-          </button>
-          <button
-            class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition cursor-pointer"
-          >
-            Next
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 
