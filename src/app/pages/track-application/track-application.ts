@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { EnquiryService } from '../../services/enquiry/enquiry-service';
 import { form, required, FormField } from '@angular/forms/signals';
 import { ToastMessages } from '../../const/global-const';
-import { ToastrService } from 'ngx-mat-toast';
+import { ToastrService } from '../../services/toast/toast-service';
 import { FieldError } from '../../components/field-error/field-error';
 import { StatusService } from '../../services/status/status-service';
 import { CategoryService } from '../../services/category/category-service';

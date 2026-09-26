@@ -1,21 +1,43 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { describe, expect, it } from 'vitest';
 import { EnquiryList } from './enquiry-list';
 
 describe('EnquiryList', () => {
-  let component: EnquiryList;
-  let fixture: ComponentFixture<EnquiryList>;
+  it('should filter enquiries by customer name', () => {
+    const component = Object.create(EnquiryList.prototype) as EnquiryList;
+    const rows = [
+      {
+        enquiryId: 1,
+        customerName: 'Alice Johnson',
+        customerEmail: '',
+        customerPhone: '',
+        message: '',
+        categoryId: '1',
+        statusId: '1',
+        enquiryType: 'Mobile',
+        isConverted: false,
+        enquiryDate: '',
+        followUpDate: '',
+        feedback: '',
+      },
+      {
+        enquiryId: 2,
+        customerName: 'Bob Smith',
+        customerEmail: '',
+        customerPhone: '',
+        message: '',
+        categoryId: '1',
+        statusId: '1',
+        enquiryType: 'Desktop',
+        isConverted: false,
+        enquiryDate: '',
+        followUpDate: '',
+        feedback: '',
+      },
+    ];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [EnquiryList],
-    }).compileComponents();
+    const filtered = component.filterEnquiries(rows, 'alice');
 
-    fixture = TestBed.createComponent(EnquiryList);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(filtered).toHaveLength(1);
+    expect(filtered[0].customerName).toBe('Alice Johnson');
   });
 });

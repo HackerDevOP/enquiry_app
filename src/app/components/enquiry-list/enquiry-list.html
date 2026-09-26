@@ -22,7 +22,8 @@
       <div class="flex items-center gap-3 w-full sm:w-auto">
         <input
           type="text"
-          placeholder="Search enquiries..."
+          [formField]="filterForm.customerName"
+          placeholder="search by customer name..."
           class="bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 w-full sm:w-64"
         />
         <button
@@ -39,91 +40,13 @@
     <div
       class="bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden"
     >
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr
-              class="border-b border-slate-800 bg-slate-950/40 text-xs font-semibold uppercase tracking-wider text-slate-400"
-            >
-              <th class="py-4 px-6">ID & Customer</th>
-              <th class="py-4 px-6">Contact Info</th>
-              <th class="py-4 px-6">Type</th>
-              <th class="py-4 px-6">Status / Cat</th>
-              <th class="py-4 px-6">Converted</th>
-              <th class="py-4 px-6">Follow-up Date</th>
-              <th class="py-4 px-6 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800/60 text-sm">
-            <!-- Sample Row 1 -->
-            @for (enq of loadEnquiry(); track enq.enquiryId) {
-              <tr class="hover:bg-slate-800/40 transition">
-                <td class="py-4 px-6">
-                  <div class="font-mono text-indigo-400 font-bold">#ENQ-{{ enq.enquiryId }}</div>
-                  <div
-                    (click)="onEdit(enq, enq.enquiryId)"
-                    class="font-semibold hover:underline cursor-pointer text-white"
-                  >
-                    {{ enq.customerName | uppercase }}
-                  </div>
-                </td>
-                <td class="py-4 px-6">
-                  <div class="text-slate-300">{{ enq.customerEmail }}</div>
-                  <div class="text-xs text-slate-500">{{ enq.customerPhone }}</div>
-                </td>
-                <td class="py-4 px-6">
-                  <span
-                    class="px-2.5 py-1 rounded-full text-xs font-medium bg-sky-500/10 text-sky-400 border border-sky-500/20"
-                    >{{ enq.enquiryType ? enq.enquiryType : 'NA' }}</span
-                  >
-                </td>
-                <td class="py-4 px-6 text-xs space-y-1">
-                  <div>
-                    <span class="text-slate-600">Category:</span> <span class="text-slate-300 font-mono ps-2">{{ category.getCategoryName(enq.categoryId) }}</span>
-                  </div>
-                  <div>
-                    <span class="text-slate-600">Status:</span> <span class="text-slate-300 font-mono ps-2">{{ status.getStatusName(enq.statusId) }}</span>
-                  </div>
-                </td>
-                <td class="py-4 px-6">
-                  <span
-                    [class]="
-                      enq.isConverted == true
-                        ? 'px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                        : 'px-2.5 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20'
-                    "
-                    >{{ enq.isConverted ? 'Yes' : 'No' }}</span
-                  >
-                </td>
-                <td class="py-4 px-6 text-xs text-slate-400">
-                  {{ enq.followUpDate | date: 'short' }}
-                </td>
-                <td class="py-4 px-6 text-right space-x-2">
-                  <button
-                  (click)="onDelete(enq.categoryId)"
-                    class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-medium transition cursor-pointer"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-6"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                      />
-                    </svg>
-                  </button>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
+      <app-table-ui
+        [columns]="enquiryColumns"
+        [rows]="filteredEnquiries()"
+        [actions]="enquiryActions"
+        (rowAction)="handleTableAction($event)"
+        (rowClick)="onEdit($event, $event.enquiryId)"
+      />
 
       <!-- Pagination Footer -->
       <div

@@ -4,9 +4,9 @@ import { Router, RouterLink } from '@angular/router';
 import { BRAND } from '../../const/global-const';
 import { UpperCasePipe } from '@angular/common';
 import { getLocal, removeLocal } from '../../helper/storage';
-import { ToastrService } from 'ngx-mat-toast';
 import { ILogin } from '../../pages/login/login';
 import { EnquiryService } from '../../services/enquiry/enquiry-service';
+import { ToastrService } from '../../services/toast/toast-service';
 
 @Component({
   imports: [RouterLink, UpperCasePipe],

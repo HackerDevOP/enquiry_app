@@ -93,55 +93,13 @@
           />
         </div>
 
-        <!-- Table -->
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr
-                class="border-b border-slate-800 bg-slate-950/40 text-xs font-semibold uppercase tracking-wider text-slate-400"
-              >
-                <th class="py-4 px-6">ID</th>
-                <th class="py-4 px-6">Category Name</th>
-                <th class="py-4 px-6">Status</th>
-                <th class="py-4 px-6 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-800/60 text-sm">
-              <!-- Sample Row 1 -->
-              @for (cat of loadCategory(); track cat.categoryId) {
-                <tr class="hover:bg-slate-800/40 transition">
-                  <td class="py-4 px-6 font-mono text-indigo-400 font-bold">
-                    #{{ cat.categoryId }}
-                  </td>
-                  <td
-                    (click)="onEdit(cat)"
-                    class="py-4 cursor-pointer px-6 font-semibold hover:underline text-white"
-                  >
-                    {{ cat.categoryName }}
-                  </td>
-                  <td class="py-4 px-6">
-                    <span
-                      [class]="
-                        cat.isActive
-                          ? 'px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                          : 'px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20'
-                      "
-                      >{{ cat.isActive ? 'Active' : 'InActive' }}</span
-                    >
-                  </td>
-                  <td class="py-4 px-6 text-right space-x-2">
-                    <button
-                    (click)="onDelete(cat.categoryId)"
-                      class="px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-medium transition cursor-pointer"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-table-ui
+          [columns]="categoryColumns"
+          [rows]="loadCategory()"
+          [actions]="categoryActions"
+          (rowAction)="handleTableAction($event)"
+          (rowClick)="onEdit($event)"
+        />
       </div>
     </div>
   </div>

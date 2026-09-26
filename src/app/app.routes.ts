@@ -15,6 +15,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/enquiry/enquiry').then((m) => m.Enquiry),
   },
   {
+    path: 'details',
+    loadComponent: () => import('./components/customer-response/customer-response').then((m) => m.CustomerResponse),
+  },
+  {
     path: 'new-enquiry',
     loadComponent: () =>
       import('./components/enquiry-form/enquiry-form').then((m) => m.EnquiryForm),

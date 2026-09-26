@@ -9,30 +9,50 @@ import {
 import { form, FormField } from '@angular/forms/signals';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-mat-toast';
 import { FieldError } from '../../../components/field-error/field-error';
+import { ToastrService } from '../../../services/toast/toast-service';
 import { Title } from '@angular/platform-browser';
 import { ToastMessages } from '../../../const/global-const';
+import { TableAction, TableColumn, TableUi } from '../../../components/table-ui/table-ui';
 
 @Component({
-  imports: [FormField, FieldError],
+  imports: [FormField, FieldError, TableUi],
   selector: 'app-category-crud',
   styleUrl: './category-crud.css',
   templateUrl: './category-crud.html',
 })
 export class CategoryCrud {
   private readonly category = inject(CategoryService);
-  private readonly title = inject(Title)
+  private readonly title = inject(Title);
   private readonly toast = inject(ToastrService);
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly categoryModel = signal(initialCategory);
   protected readonly isEditMode = signal<boolean>(false);
+  protected readonly categoryColumns: TableColumn<ICategory>[] = [
+    { key: 'categoryId', label: 'ID', formatter: (value) => `#${value}` },
+    { key: 'categoryName', label: 'Category Name' },
+    {
+      key: 'isActive',
+      label: 'Status',
+      type: 'badge',
+      formatter: (value) => (value ? 'Active' : 'InActive'),
+      badgeClass: (value) =>
+        value
+          ? 'px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+          : 'px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20',
+    },
+  ];
+  protected readonly categoryActions: TableAction<ICategory>[] = [
+    { label: 'Edit', action: 'edit', classes: 'px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition cursor-pointer' },
+    { label: 'Delete', action: 'delete', classes: 'px-3 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 text-xs font-medium transition cursor-pointer' },
+  ];
 
   ngOnInit() {
     this.category.getCategory.reload();
-    this.title.setTitle('Category List')
+    this.title.setTitle('Category List');
   }
+
   loadCategory = computed(() => {
     return this.category.getCategory.value()?.data ?? [];
   });
@@ -51,6 +71,17 @@ export class CategoryCrud {
   onReset() {
     this.categoryModel.set(initialCategory);
     this.isEditMode.set(false);
+  }
+
+  handleTableAction(event: { action: string; row: ICategory }) {
+    if (event.action === 'edit') {
+      this.onEdit(event.row);
+      return;
+    }
+
+    if (event.action === 'delete') {
+      this.onDelete(event.row.categoryId);
+    }
   }
 
   onUpsert(event: Event) {
@@ -91,6 +122,5 @@ export class CategoryCrud {
           this.toast.error(err.error.message);
         },
       });
-
   }
 }

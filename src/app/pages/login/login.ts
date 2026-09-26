@@ -2,8 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { form, required, FormField } from '@angular/forms/signals';
 import { Title } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
-import { ToastrService } from 'ngx-mat-toast';
 import { FieldError } from '../../components/field-error/field-error';
+import { ToastrService } from '../../services/toast/toast-service';
 import { setLocal } from '../../helper/storage';
 import { EnquiryService } from '../../services/enquiry/enquiry-service';
 

@@ -1,0 +1,61 @@
+<!-- Modal Backdrop Wrapper (Visible when submittedEnquiry has data) -->
+@if (!submittedEnquiry()) {
+  <div
+    class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 overflow-y-auto"
+  >
+    <!-- Modal Dialog Box -->
+    <div
+      class="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl p-6 sm:p-8 my-8 relative animate-in fade-in zoom-in-95 duration-150"
+    >
+      <!-- Success Card Content -->
+      <div
+        class="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 shadow-lg shadow-emerald-950/20"
+      >
+        <div class="flex flex-col md:flex-row  items-center justify-between gap-3 pb-4 border-b border-emerald-500/20">
+          <div class="space-y-2">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+              Enquiry submitted successfully
+            </p>
+            <h3 class="md:text-lg text-sm font-bold text-white">Please note down your Enquiry ID!</h3>
+            <p class="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
+              Keep this reference ID safe. You will need it to track your enquiry status in the
+              future.
+            </p>
+          </div>
+          <span
+            class="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-200"
+          >
+            #ENQ-{{ submittedEnquiry()?.data.enquiryId || 'NEW' }}
+          </span>
+        </div>
+
+        <div class="mt-4 grid gap-3 text-sm text-slate-200 sm:grid-cols-2">
+          <div>
+            <p class="text-xs uppercase tracking-wider text-emerald-300/80">Name:</p>
+            <p class="mt-1 font-medium text-white">{{ submittedEnquiry()?.data.customerName }}</p>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-wider text-emerald-300/80">Email:</p>
+            <p class="mt-1 font-medium text-white">{{ submittedEnquiry()?.data.customerEmail }}</p>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-wider text-emerald-300/80">Phone:</p>
+            <p class="mt-1 font-medium text-white">{{ submittedEnquiry()?.data.customerPhone }}</p>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-wider text-emerald-300/80">Enquiry Type:</p>
+            <p class="mt-1 font-medium text-white">{{ submittedEnquiry()?.data.enquiryType }}</p>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-xl border border-emerald-500/20 bg-slate-950/30 p-4">
+          <p class="text-xs uppercase tracking-wider text-emerald-300/80">Message:</p>
+          <p class="mt-2 text-sm leading-6 text-slate-200">{{ submittedEnquiry()?.data.message }}</p>
+        </div>
+      </div>
+      <div class="flex justify-end pe-2 pt-4">
+        <button routerLink="/"  class="pt-2 text-lg cursor-pointer hover:text-blue-600 text-emerald-600 transition-all">Home</button>
+      </div>
+    </div>
+  </div>
+}

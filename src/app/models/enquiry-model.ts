@@ -7,6 +7,12 @@ export interface IEnquiryRes {
   message: string;
 }
 
+export interface IEnquirySingle {
+  error: string[]
+  result: boolean
+  data: IEnquiry
+  message: string
+}
 export interface IEnquiry {
   enquiryId: number;
   customerName: string;
@@ -45,3 +51,12 @@ export const enquirySchema = schema<IEnquiry>((root) => {
   required(root.message, { message: 'Message content is required' });
   required(root.enquiryType, { message: 'Please select an enquiry type' });
 });
+
+
+export interface IFilter{
+  customerName:string
+}
+
+export const initialFilter :IFilter={
+  customerName: ''
+}

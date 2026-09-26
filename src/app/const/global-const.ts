@@ -27,7 +27,7 @@ export const ToastMessages = {
   DELETE_SUCCESS: 'deleted successfully!',
   // Validation / Form Submission
   INVALID_FORM: 'Please fix the highlighted errors before submitting.',
-  REQUIRED_FIELDS: 'Please fill in all required fields.',
+  REQUIRED_FIELDS: 'Please fill in required fields.',
 
   // General API & Network Errors
   SERVER_ERROR: 'Server error occurred. Please try again later.',
@@ -43,4 +43,10 @@ export const MESSAGES = {
 
 export const BRAND = {
   Name: 'Nqiry',
+};
+
+export const TableFields = {
+  enquiry: ['ID & Name', 'Contact Info', 'Type', 'Category & Status', 'Actions'],
+  status: ['ID', 'Status Name', 'Status', 'Actions'],
+  category: ['ID', 'Category Name', 'Status', 'Actions'],
 };
