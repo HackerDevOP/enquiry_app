@@ -1,0 +1,1 @@
+import{H as Yh,K as ae,Mt as y,T as M}from"./main-ELTIT3JC.js";function w(t){t||(t=y(ae));let i=new M(e=>{if(t.destroyed){e.next();return}return t.onDestroy(e.next.bind(e))});return e=>e.pipe(Yh(i))}export{w as t};
